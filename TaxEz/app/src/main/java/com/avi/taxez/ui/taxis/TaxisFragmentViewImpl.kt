@@ -17,12 +17,14 @@ import com.avi.taxez.data.models.Taxi
 /**
  * Created by avi.barel on 27/07/2018.
  */
-class TaxisFragmentViewImpl(layoutInflater: LayoutInflater, container: ViewGroup?, val savedState: Bundle?) : BaseFragmentViewImpl(layoutInflater, container), ITaxisFragmentView {
+class TaxisFragmentViewImpl(layoutInflater: LayoutInflater, container: ViewGroup?, val savedState: Bundle?) : BaseFragmentViewImpl(layoutInflater, container), ITaxisFragmentView, AvailableTaxisAdapter.TaxisAdapterCallback {
 
     private var txtSearchTerm: TextView? = null
     private var progress: ProgressBar? = null
     private var recyclerTaxis: RecyclerView? = null
     private var taxisAdapter: AvailableTaxisAdapter? = null
+
+    private var listener: ITaxisFragmentView.TaxisFragmentCallback? = null
 
     override fun layoutResId(): Int {
         return R.layout.fragment_taxis
@@ -41,9 +43,13 @@ class TaxisFragmentViewImpl(layoutInflater: LayoutInflater, container: ViewGroup
 
         recyclerTaxis?.layoutManager = LinearLayoutManager(rootView.context, RecyclerView.VERTICAL, false)
         recyclerTaxis?.adapter = taxisAdapter
+
+        taxisAdapter?.setListener(this)
     }
 
     override fun releaseViews() {
+
+        taxisAdapter?.setListener(null)
 
         txtSearchTerm = null
         progress = null
@@ -53,6 +59,10 @@ class TaxisFragmentViewImpl(layoutInflater: LayoutInflater, container: ViewGroup
 
         recyclerTaxis = null
         taxisAdapter = null
+    }
+
+    override fun setListener(listener: ITaxisFragmentView.TaxisFragmentCallback?) {
+        this.listener = listener
     }
 
     override fun toggleProgress(isLoading: Boolean) {
@@ -76,6 +86,10 @@ class TaxisFragmentViewImpl(layoutInflater: LayoutInflater, container: ViewGroup
 
     override fun updateTaxisResult(taxis: ArrayList<Taxi>) {
         taxisAdapter?.setData(taxis)
+    }
+
+    override fun onTaxiClicked(taxi: Taxi) {
+        listener?.onTaxiClicked(taxi)
     }
 
 }

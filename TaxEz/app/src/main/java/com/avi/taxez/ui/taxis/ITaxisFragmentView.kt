@@ -8,6 +8,11 @@ import com.avi.taxez.data.models.Taxi
  */
 interface ITaxisFragmentView : IBaseFragmentView {
 
+    interface TaxisFragmentCallback {
+        fun onTaxiClicked(taxi: Taxi)
+    }
+
+    fun setListener(listener: TaxisFragmentCallback?)
     fun toggleProgress(isLoading: Boolean)
     fun updateSearchTerm(origin: String, destination: String)
     fun updateTaxisResult(taxis: ArrayList<Taxi>)

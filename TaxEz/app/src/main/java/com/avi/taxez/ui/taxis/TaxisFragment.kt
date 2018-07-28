@@ -11,7 +11,7 @@ import com.avi.taxez.data.models.Taxi
 /**
  * Created by avi.barel on 27/07/2018.
  */
-class TaxisFragment : BaseFragment<TaxisFragmentViewModel, TaxisFragmentViewImpl>() {
+class TaxisFragment : BaseFragment<TaxisFragmentViewModel, TaxisFragmentViewImpl>(), ITaxisFragmentView.TaxisFragmentCallback {
 
     companion object {
 
@@ -58,6 +58,14 @@ class TaxisFragment : BaseFragment<TaxisFragmentViewModel, TaxisFragmentViewImpl
         super.onResume()
 
         viewImpl.updateSearchTerm(viewModel.searchTermOrigin, viewModel.searchTermDestination)
+
+        viewImpl.setListener(this)
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        viewImpl.setListener(null)
     }
 
     override fun handleBackPressed(): Boolean {
@@ -74,6 +82,10 @@ class TaxisFragment : BaseFragment<TaxisFragmentViewModel, TaxisFragmentViewImpl
 
     override fun provideViewModel(): Class<TaxisFragmentViewModel> {
         return TaxisFragmentViewModel::class.java
+    }
+
+    override fun onTaxiClicked(taxi: Taxi) {
+        TaxiDialogFragment.newInstance(taxi).show(childFragmentManager, null)
     }
 
 }
