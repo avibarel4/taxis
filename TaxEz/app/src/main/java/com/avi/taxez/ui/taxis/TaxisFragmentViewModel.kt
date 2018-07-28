@@ -17,8 +17,10 @@ class TaxisFragmentViewModel : BaseViewModel() {
     private var refreshHandler: Handler?
     private var refreshRunnable: Runnable?
 
-    private var searchTermOrigin = ""
-    private var searchTermDestination = ""
+    var searchTermOrigin = ""
+        private set
+    var searchTermDestination = ""
+        private set
 
     companion object {
         private val TAG = TaxisFragmentViewModel::class.java.simpleName

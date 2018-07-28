@@ -1,5 +1,6 @@
 package com.avi.taxez.ui.taxis
 
+import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -30,9 +31,10 @@ class AvailableTaxisAdapter : RecyclerView.Adapter<AvailableTaxisAdapter.ViewHol
     private var items: ArrayList<Taxi> = arrayListOf()
 
     fun setData(taxis: ArrayList<Taxi>) {
+        val diffResult = DiffUtil.calculateDiff(TaxisDiffCallback(items, taxis))
         items.clear()
         items.addAll(taxis)
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

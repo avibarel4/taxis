@@ -34,7 +34,14 @@ class TaxiService private constructor() {
             Thread.sleep(1000)
 
             val taxisResponse = MockUtils.loadJson<TaxisResponse>(file, TaxisResponse::class.java)
-            taxisResponse.availableTaxis ?: arrayListOf()
+            val result = taxisResponse.availableTaxis ?: arrayListOf()
+
+            // sort by eta
+            result.sortBy {
+                it.etaInMinutes
+            }
+
+            return@fromCallable result
         }
     }
 

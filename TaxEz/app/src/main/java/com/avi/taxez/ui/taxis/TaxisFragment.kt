@@ -13,9 +13,6 @@ import com.avi.taxez.data.models.Taxi
  */
 class TaxisFragment : BaseFragment<TaxisFragmentViewModel, TaxisFragmentViewImpl>() {
 
-    private var origin: String = ""
-    private var destination: String = ""
-
     companion object {
 
         private const val EXTRA_KEY_ORIGIN = "extra_key_origin"
@@ -36,8 +33,8 @@ class TaxisFragment : BaseFragment<TaxisFragmentViewModel, TaxisFragmentViewImpl
 
         arguments?.let {
             if (savedInstanceState == null) {
-                origin = it.getString(EXTRA_KEY_ORIGIN, "")
-                destination = it.getString(EXTRA_KEY_DESTINATION, "")
+                val origin = it.getString(EXTRA_KEY_ORIGIN, "")
+                val destination = it.getString(EXTRA_KEY_DESTINATION, "")
                 viewModel.searchTaxis(origin, destination)
             }
         }
@@ -60,7 +57,7 @@ class TaxisFragment : BaseFragment<TaxisFragmentViewModel, TaxisFragmentViewImpl
     override fun onResume() {
         super.onResume()
 
-        viewImpl.updateSearchTerm(origin, destination)
+        viewImpl.updateSearchTerm(viewModel.searchTermOrigin, viewModel.searchTermDestination)
     }
 
     override fun handleBackPressed(): Boolean {
