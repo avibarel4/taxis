@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TaxEz</string>
+
+    <string name="taxis_result_title"><![CDATA[Showing Results for <b>%1$s</b> to <b>%2$s]]></string>
+    <string name="taxi_eta_minutes">%dm</string>
+    <string name="taxi_eta_hours_minutes">%1$dh %2$dm</string>
+</resources>

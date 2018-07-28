@@ -1,0 +1,19 @@
+{
+  "availableTaxis": [
+    {
+      "imageUrl": "https://thumbs.dreamstime.com/z/taxi-12245448.jpg",
+      "stationName": "Happy Taxi",
+      "etaInMinutes": 115
+    },
+    {
+      "imageUrl": "http://www.allwhitebackground.com/images/2/1936.png",
+      "stationName": "24/7 Taxi",
+      "etaInMinutes": 5
+    },
+    {
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/03/TAXI.jpg",
+      "stationName": "Taxi & Lights",
+      "etaInMinutes": 13
+    }
+  ]
+}

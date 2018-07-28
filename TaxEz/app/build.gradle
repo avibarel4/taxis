@@ -1,0 +1,49 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.avi.taxez"
+        minSdkVersion 23
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+ext {
+    androidSupportVersion = "27.1.1"
+
+    aacVersion = "1.1.1"
+    glideVersion = "3.8.0"
+    gsonVersion = "2.8.0"
+
+    rxAndroidVersion = '2.0.1'
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+
+    implementation "com.android.support:design:${androidSupportVersion}"
+    implementation "com.android.support:recyclerview-v7:${androidSupportVersion}"
+
+    implementation "com.github.bumptech.glide:glide:${glideVersion}"
+    implementation "com.google.code.gson:gson:${gsonVersion}"
+    implementation "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}"
+
+    implementation "android.arch.lifecycle:extensions:${aacVersion}"
+    annotationProcessor "android.arch.lifecycle:compiler:${aacVersion}"
+}
